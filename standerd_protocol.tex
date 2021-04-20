@@ -1,0 +1,130 @@
+\documentclass[10pt,a4paper]{protocol}
+\usepackage{amssymb,amsmath,amsfonts,eurosym,ulem,graphicx,caption,color,setspace,sectsty,comment,footmisc,caption,pdflscape,subfigure,array}
+
+% Change the page layout if you need to
+\geometry{left=1cm,right=9cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1cm,bottom=1cm}
+
+% Change the font if you want to.
+
+% If using pdflatex:
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}
+
+% If using xelatex or lualatex:
+% \setmainfont{Lato}
+
+% Change the colours if you want to
+\definecolor{Bright}{HTML}{58318f}
+\definecolor{Green}{HTML}{319866}
+\definecolor{Black}{HTML}{111111}
+\definecolor{LightGrey}{HTML}{515c50}
+
+\definecolor{main}{HTML}{00274C}
+\definecolor{background}{HTML}{EFF0F1}
+
+\definecolor{alert}{HTML}{CC6600}
+\definecolor{example}{HTML}{00274C}
+
+\colorlet{heading}{main}
+\colorlet{accent}{alert}
+\colorlet{emphasis}{main}
+\colorlet{body}{main}
+
+
+% Change the bullets for itemize and rating marker
+% for \risk if you want to
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faSpinner}
+
+%% sample.bib contains your publications
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{Randomized Controlled Trials}
+\tagline{Called the ``gold standard'' because it costs a lot of money}
+\made{August 7, 2020}
+\logo{6.5cm}{"rosslogo"}
+
+
+
+\docinfo{%
+  % can add more \addedtopeople
+  \madeby{Sarah Miller}{mille@umich.edu}{for BE 887}
+%  \addedto{John Smith}{abv1@uni.ac.uk}{October 3, 2017}
+}
+
+
+%\purpose{
+%Difference-in-differences compares the change in an outcome in treated units before and after receiving the treatment to the change in the outcome in untreated units over the same time period. 
+%} % add a short discription of the purpose for this protocol
+
+
+%% Make the header extend all the way to the right, if you want.
+\begin{fullwidth}
+\makeheader
+\end{fullwidth}
+
+%% Provide the file name containing the sidebar contents as an optional parameter to \need.
+%% You can always just use \marginpar{...} if you do
+%% not need to align the top of the contents to any
+%% \need title in the "main" bar.
+In a randomized controlled trial, the researcher randomly assigns some units to be treated and other units to be untreated. Because treatment is assigned at random, concern about selection into the treatment group is minimal.
+
+
+\need[materials]{When to use}
+\req{1}{The researcher controls treatment assignment, or is partnering with an organization that is willing to assign treatment at random}{}
+\begin{itemize}
+\item Ideally the researcher can gather information about units prior to random assignment.
+\end{itemize}
+\divider
+
+
+\need[]{What to Do: The Basics}
+
+\step{1}{Randomly assign some units to the treatment group and others to the control group}{40}
+\begin{itemize}
+    \item Conduct a power analysis to determine the size of the sample you will need to detect effects. Power is maximized when half the sample is treated and half is not.
+    \item Prior to randomly assigning treatment, post your pre-analysis plan on the AEA RCT Registry or the Open Science Framework. 
+	\item Verify that control and treatment groups are balanced across characteristics.
+	\item Alternatively, assign treatment using a stratification mechanism that makes sure these groups are balanced.
+	\begin{itemize}
+	    \item E.g., if you are assigning half of the sample to treatment, assign one woman to the control group for each woman you assign to the treatment group.
+	    \item This will assure you will be perfectly balanced on gender.
+	\end{itemize}
+\end{itemize}
+\divider
+
+\step{2}{Estimation}{25}
+\begin{itemize}
+	\item Estimate a model of the form $y_{i}=\beta_0 + \beta_{RCT} D_i + \beta_1 X_i + \epsilon_i$, where $D_i=1$ if $i$ is assigned to the treatment group.
+	\item If there is perfect compliance (i.e., no one in the control group is treated, and everyone in the treatment group is treated), then the coefficient $\beta_{RCT}$ will give you the ATE and ATT.
+	\item If there is imperfect compliance, you can estimate the LATE using treatment group assignment as an instrument for treatment receipt.
+	\item Including covariates ($X_i$) measured prior to treatment can improve precision. Pre-treatment measures of the outcome may be particularly good for this purpose.
+	\item If different strata have different treatment group assignment probabilities, you must include strata fixed effects.
+\end{itemize}
+\divider
+
+
+
+\clearpage
+
+\need[otherinfo]{Sources}
+
+\nocite{*}
+
+\printbibliography
+
+
+\divider
+
+
+%% If the NEXT page doesn't start with a \need but you'd
+%% still like to add a sidebar, then use this command on THIS
+%% page to add it. The optional argument lets you pull up the
+%% sidebar a bit so that it looks aligned with the top of the
+%% main column.
+% \addnextpagesidebar[-1ex]{page3sidebar}
+
+
+\end{document}
